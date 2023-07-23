@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import Chat from '../components/Chat';
 import ChatScrollAnchor from '../components/ChatScrollAnchor';
 import InfoBox from '../components/InfoBox';
+import { toast } from 'sonner';
 
 export default function AMA() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -19,7 +20,16 @@ export default function AMA() {
     isLoading,
     handleInputChange,
     handleSubmit,
-  } = useChat();
+  } = useChat({
+    onError: (error) => {
+      toast.error(error.message);
+      if (
+        error.message === 'You have reached your request limit for the day.'
+      ) {
+        va.track('request-limit-reached');
+      }
+    },
+  });
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
