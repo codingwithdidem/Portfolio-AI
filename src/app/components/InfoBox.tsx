@@ -26,7 +26,7 @@ Sometimes the answer might not be in the data I provided, so it will generate th
     question: 'What are the limitations? 🫣',
     answer: matter(`Well, there are some limitations:
 - Currently, AMA only supports **English**.
-- The rate limit is **2 requests per day per person**.
+- The rate limit is **2 requests per day per person**. Make sure you use it wisely 🤗
 `).content,
   },
 ];

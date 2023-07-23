@@ -5,9 +5,7 @@ import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
-import { AIMessage, HumanMessage } from 'langchain/schema';
 import { Document } from 'langchain/document';
-import {} from 'langchain/callbacks';
 
 export const runtime = 'edge';
 
