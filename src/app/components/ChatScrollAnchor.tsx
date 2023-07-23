@@ -9,7 +9,7 @@ type ChatScrollAnchorProps = {
 };
 
 const ChatScrollAnchor: FC<ChatScrollAnchorProps> = ({ track }) => {
-  const ref = useRef(null);
+  const ref = useRef<null | HTMLDivElement>(null);
   const isAtBottom = useAtBottom();
 
   const isInView = useInView(ref, {
