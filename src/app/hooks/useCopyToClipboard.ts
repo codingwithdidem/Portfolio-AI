@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
+import va from '@vercel/analytics';
 
 type Props = {
   text: string;
@@ -15,6 +16,7 @@ export default function useCopyToClipboard({ text, timeout = 2000 }: Props) {
       setCopied(true);
       setTimeout(() => setCopied(false), timeout);
       toast.success('Copied to clipboard');
+      va.track('copied-to-clipboard', { text });
     } catch (err) {
       toast.error('Failed to copy to clipboard');
       console.error(err);

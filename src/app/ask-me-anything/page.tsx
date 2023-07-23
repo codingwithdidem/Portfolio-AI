@@ -1,5 +1,6 @@
 'use client';
 
+import va from '@vercel/analytics';
 import { useChat } from 'ai/react';
 import AIButton from '../components/AIButton';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -27,6 +28,9 @@ export default function AMA() {
 
     handleSubmit(e);
     setInput('');
+    va.track('asked-question', {
+      question: input,
+    });
   };
 
   return (

@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { Toaster } from 'sonner';
 import Header from './Header';
 import Footer from './Footer';
+import { Analytics } from '@vercel/analytics/react';
 
 type ProvidersProps = {
   children?: React.ReactNode;
@@ -25,6 +26,7 @@ const Providers: FC<ProvidersProps> = ({ children }) => {
       {children}
 
       {displayFooter && <Footer />}
+      <Analytics />
     </div>
   );
 };
