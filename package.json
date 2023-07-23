@@ -9,17 +9,36 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.8",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "ai": "^2.1.22",
     "autoprefixer": "10.4.14",
+    "classnames": "^2.3.2",
+    "debounce": "^1.2.1",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
-    "next": "13.4.9",
+    "framer-motion": "^10.13.0",
+    "gray-matter": "^4.0.3",
+    "langchain": "^0.0.113",
+    "lottie-react": "^2.4.0",
+    "lucide-react": "^0.263.0",
+    "next": "^13.4.12",
+    "notion-to-md": "^3.1.1",
+    "openai-edge": "^1.2.0",
     "postcss": "8.4.25",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-markdown": "^8.0.7",
+    "react-textarea-autosize": "^8.5.2",
+    "remark-gfm": "^3.0.1",
+    "sonner": "^0.6.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "@types/debounce": "^1.2.1"
   }
 }

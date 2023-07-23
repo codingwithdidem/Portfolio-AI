@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .background {
+    @apply fixed -z-[1] inset-0 w-screen min-h-screen;
+  }
+
+  .background::before {
+    @apply absolute top-0 w-full h-full z-[2];
+    content: '';
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 254, 254, 0.1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+
+    pointer-events: none;
+  }
+
+  .background::after {
+    @apply absolute top-0 w-full h-full z-[1] bg-[url('/assets/images/grid.svg')] opacity-20;
+    content: '';
+    z-index: 1;
+    filter: invert(1);
+    pointer-events: none;
+  }
+
+  .gradient-blur {
+    background: rgba(237, 117, 200, 1);
+    max-width: 800px;
+    background: conic-gradient(from 40deg, rgb(65, 171, 237), rgb(83, 22, 238));
+    width: 100%;
+    height: 100%;
+    filter: blur(120px);
+    position: absolute;
+    top: 20px;
+    left: 20%;
+    z-index: 3;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .highlight-mask {
+    -webkit-mask-image: linear-gradient(white 5%, transparent 20%);
+    mask-image: linear-gradient(white 5%, transparent 20%);
+  }
+
+  .highlight-container-mask {
+    -webkit-mask-composite: xor;
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content, linear-gradient(#fff 0 0);
+  }
+}
+
+::selection {
+  background: #af99ff;
+  color: #fff;
+}
