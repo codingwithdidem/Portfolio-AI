@@ -1,6 +1,7 @@
 import { kv } from '@vercel/kv';
 import { Ratelimit } from '@upstash/ratelimit';
 import { StreamingTextResponse, LangChainStream } from 'ai';
+import { NotionAPILoader } from 'langchain/document_loaders/web/notionapi';
 import { ConversationalRetrievalQAChain } from 'langchain/chains';
 import { BufferMemory } from 'langchain/memory';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
@@ -53,20 +54,20 @@ export async function POST(req: Request) {
 
   const { stream, handlers } = LangChainStream();
 
-  const doc = new Document({
-    pageContent: `Hello, I am Didem Küçükkaraaslan. Frontend developer and content creator. I love to create videos
-  about tech products, coding languages and frameworks. I dont love icecream.`,
+  const pageLoader = new NotionAPILoader({
+    clientOptions: {
+      auth: process.env.NOTION_INTEGRATION_TOKEN,
+    },
+    id: process.env.NOTION_PAGE_ID || '',
+    type: 'page',
   });
 
-  const textSplitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 500,
-    chunkOverlap: 0,
-  });
-  const splitData = await textSplitter.splitDocuments([doc]);
+  const pageDocs = await pageLoader.loadAndSplit();
+  console.log({ pageDocs });
 
   // Load the docs into the vector store
   const vectorStore = await MemoryVectorStore.fromDocuments(
-    splitData,
+    pageDocs,
     new OpenAIEmbeddings(),
   );
 
