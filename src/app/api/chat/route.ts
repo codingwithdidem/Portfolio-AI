@@ -6,9 +6,7 @@ import { ConversationalRetrievalQAChain } from 'langchain/chains';
 import { BufferMemory } from 'langchain/memory';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
-import { Document } from 'langchain/document';
 
 export const runtime = 'edge';
 

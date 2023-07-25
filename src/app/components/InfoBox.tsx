@@ -25,7 +25,8 @@ Sometimes the answer might not be in the data I provided, so it will generate th
   {
     question: 'What are the limitations? 🫣',
     answer: matter(`Well, there are some limitations:
-- Currently, AMA only supports **English**.
+- Not all of your questions have answers. If you ask me something that I don't know, I will let you know.
+- Make sure you ask appropriate questions. Do not offend me or the bot. 
 - The rate limit is **2 requests per day per person**. Make sure you use it wisely 🤗
 `).content,
   },
