@@ -7,14 +7,12 @@ import { BufferMemory } from 'langchain/memory';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
+import prisma from '@/app/lib/prisma';
 
 export const runtime = 'edge';
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
-
-  // Save the chat history to KV
-  await kv.set('chat_history', JSON.stringify(messages));
 
   if (
     process.env.NODE_ENV != 'development' &&
@@ -61,7 +59,6 @@ export async function POST(req: Request) {
   });
 
   const pageDocs = await pageLoader.loadAndSplit();
-  console.log({ pageDocs });
 
   // Load the docs into the vector store
   const vectorStore = await MemoryVectorStore.fromDocuments(
@@ -76,8 +73,16 @@ export async function POST(req: Request) {
     streaming: true,
     callbacks: [
       {
-        handleLLMNewToken(token) {
+        async handleLLMNewToken(token) {
           streamedResponse += token;
+
+          // Save the answer to postgres db
+          await prisma.aMA.create({
+            data: {
+              answer: streamedResponse,
+              question: messages[messages.length - 1].content,
+            },
+          });
         },
       },
     ],
@@ -94,10 +99,12 @@ export async function POST(req: Request) {
     },
   );
 
+  const question = messages[messages.length - 1].content;
+
   chain
     .call(
       {
-        question: messages[messages.length - 1].content,
+        question,
         chatHistory: messages,
       },
       [handlers],

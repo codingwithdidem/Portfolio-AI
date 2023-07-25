@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.9",
+    "@prisma/client": "^5.0.0",
     "@types/node": "20.4.1",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "@upstash/ratelimit": "^0.4.3",
     "@vercel/analytics": "^1.0.1",
     "@vercel/kv": "^0.2.2",
+    "@vercel/postgres": "^0.4.1",
     "ai": "^2.1.22",
     "autoprefixer": "10.4.14",
     "classnames": "^2.3.2",
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
-    "@types/debounce": "^1.2.1"
+    "@types/debounce": "^1.2.1",
+    "prisma": "^5.0.0"
   }
 }
