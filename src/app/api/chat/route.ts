@@ -7,7 +7,6 @@ import { BufferMemory } from 'langchain/memory';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
-import prisma from '@/app/lib/prisma';
 
 export const runtime = 'edge';
 
@@ -75,14 +74,6 @@ export async function POST(req: Request) {
       {
         async handleLLMNewToken(token) {
           streamedResponse += token;
-
-          // Save the answer to postgres db
-          await prisma.aMA.create({
-            data: {
-              answer: streamedResponse,
-              question: messages[messages.length - 1].content,
-            },
-          });
         },
       },
     ],

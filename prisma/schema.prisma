@@ -12,7 +12,7 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
-model AMA {
+model Ama {
   id        Int      @id @default(autoincrement())
   question  String
   answer    String
